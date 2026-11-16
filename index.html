@@ -365,7 +365,9 @@ svg{flex:none}
 
 #app{max-width:520px;margin:0 auto;min-height:100dvh;position:relative}
 .screen{padding:calc(env(safe-area-inset-top,0px) + 8px) var(--gutter) calc(var(--tab-height) + env(safe-area-inset-bottom,0px) + 16px)}
-.screen.page{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 28px)}
+.screen.page{padding-bottom:calc(env(safe-area-inset-bottom,0px) + 56px)}
+#app{display:flex;flex-direction:column}
+.screen.home{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding-bottom:calc(var(--tab-height) + env(safe-area-inset-bottom,0px) + 8px)}
 .stack{display:flex;flex-direction:column;gap:12px}
 .row{display:flex;align-items:center;gap:8px}
 .row-spread{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -381,6 +383,7 @@ svg{flex:none}
 .icon-btn svg{width:24px;height:24px}
 .nav .icon-btn:first-child{margin-left:-10px}
 .nav.trail .icon-btn{margin-right:-8px}
+.nav .icon-btn:last-child{margin-right:-8px}
 
 /* greeting + cards */
 .greeting{padding:0 4px 4px}
@@ -571,6 +574,58 @@ textarea.field{min-height:120px;resize:vertical;line-height:var(--lh-body)}
 /* toast */
 .toast{position:fixed;left:50%;bottom:calc(var(--tab-height) + env(safe-area-inset-bottom,0px) + 12px);transform:translateX(-50%) translateY(16px);padding:10px 16px;border-radius:var(--radius-md);font-size:var(--fs-subhead);z-index:60;opacity:0;transition:all var(--motion-med) var(--ease-standard);pointer-events:none;max-width:88vw;text-align:center}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* —— Home, simplified (no scroll) —— */
+.home-fit{flex:1;min-height:0;overflow:hidden;display:flex;flex-direction:column}
+.home-fit .stack{flex:1;gap:14px;justify-content:flex-start;min-height:0}
+.home-greet{font-size:13px;font-weight:500;color:var(--color-text-muted);letter-spacing:.01em}
+.weight-main .hero-weight{margin-top:2px}
+.weight-main .hero-weight .n{font-size:48px;letter-spacing:-1.4px}
+.plus-record{margin-top:auto;display:flex;align-items:center;justify-content:center;gap:8px;min-height:52px;font-size:17px;font-weight:650}
+.plus-record svg{width:22px;height:22px}
+.disclaimer-line{margin:0;text-align:center;font-size:11px;line-height:1.35;color:var(--color-text-muted);padding:0 8px}
+
+/* Record sheet */
+.sheet-mask{position:absolute;inset:0;z-index:40;background:rgba(28,19,40,.36);display:flex;align-items:flex-end;justify-content:center;padding:0 12px calc(var(--tab-height) + env(safe-area-inset-bottom,0px) + 8px)}
+[data-theme="dark"] .sheet-mask{background:rgba(0,0,0,.52)}
+.sheet{width:100%;max-width:496px;border-radius:var(--radius-2xl);padding:8px 12px 12px}
+.sheet-handle{width:36px;height:4px;border-radius:2px;background:var(--color-track);margin:4px auto 10px}
+.sheet-title{font-size:13px;font-weight:600;color:var(--color-text-muted);text-align:center;margin-bottom:8px}
+.sheet-item{display:flex;align-items:center;gap:12px;width:100%;min-height:48px;padding:0 8px;border:0;background:transparent;color:var(--color-text);font:inherit;font-size:17px;font-weight:600;text-align:left;border-radius:var(--radius-md)}
+.sheet-item .glyph{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--color-accent-soft);color:var(--color-accent-text);flex:0 0 36px}
+.sheet-item .glyph svg{width:18px;height:18px}
+.sheet-cancel{margin-top:6px;width:100%;min-height:44px;border:0;background:transparent;color:var(--color-text-muted);font:inherit;font-size:16px;font-weight:600}
+
+/* Drug picker field on dose form */
+.pick-field{display:flex;align-items:center;justify-content:space-between;gap:8px;text-align:left;width:100%;min-height:var(--touch);padding:8px 12px;cursor:pointer}
+.pick-field .pick-name{font-size:17px;font-weight:600;color:var(--color-text)}
+.pick-field .pick-sub{font-size:13px;color:var(--color-text-muted);margin-top:1px}
+.pick-field .pick-ph{font-size:17px;font-weight:500;color:var(--color-text-muted)}
+.pick-field .chev{color:var(--color-text-muted);flex:0 0 auto;display:flex}
+
+/* Medication picker */
+.search-field{display:flex;align-items:center;gap:8px;min-height:40px;padding:0 12px;border-radius:var(--radius-md);color:var(--color-text-muted);font-size:15px}
+.search-field svg{flex:0 0 auto;width:20px;height:20px}
+.search-field input{flex:1;min-width:0;border:0;background:transparent;color:var(--color-text);font:inherit;font-size:15px;outline:none;min-height:40px;padding:0}
+.picker-group{margin-top:4px}
+.picker-row{display:flex;align-items:center;gap:10px;width:100%;min-height:52px;padding:6px 12px;border:0;border-bottom:1px solid var(--color-separator);background:transparent;color:inherit;font:inherit;text-align:left}
+.list .picker-row:last-child{border-bottom:0}
+.picker-row .names{flex:1;min-width:0}
+.picker-row .gen{font-size:16px;font-weight:600;color:var(--color-text)}
+.picker-row .brand{font-size:13px;color:var(--color-text-muted);margin-top:1px}
+.route{flex:0 0 auto;font-size:11px;font-weight:650;letter-spacing:.02em;padding:3px 8px;border-radius:var(--radius-pill);background:var(--color-surface-muted);color:var(--color-text-secondary)}
+.route.oral{background:var(--color-success-soft);color:var(--color-success)}
+.route.inject{background:var(--color-accent-soft);color:var(--color-accent-text)}
+.picker-row[aria-selected="true"]{background:transparent}
+.picker-row .tick{color:var(--color-accent-text);flex:0 0 20px;display:flex;min-height:20px}
+.trademark-note{font-size:11px;line-height:1.4;color:var(--color-text-muted);padding:8px 4px 0;margin:0}
+
+/* Compact trend stats */
+.stat-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-top:4px}
+.stat-row .cell .k{font-size:11px;color:var(--color-text-muted)}
+.stat-row .cell .v{font-size:17px;font-weight:650;margin-top:2px;font-variant-numeric:tabular-nums}
+.stat-row .cell .v.good{color:var(--color-success)}
+
 </style>
 </head>
 <body>
@@ -583,7 +638,7 @@ textarea.field{min-height:120px;resize:vertical;line-height:var(--lh-body)}
    曲线 / Curve — personal GLP-1 tracker prototype (single file)
    Data: localStorage, scoped per local account. Not medical advice.
    ===================================================================== */
-const APP_VERSION = '0.1.0';
+const APP_VERSION = '0.4.0';
 const LS = { accounts:'curve.accounts', session:'curve.session', data:u=>'curve.data.'+u };
 
 /* ---------------- i18n ---------------- */
@@ -608,8 +663,8 @@ const I18N = {
   dueBannerTitle:'{d} 到时间了', dueBannerBody:'计划时间 {t}', markDone:'记录',
   logTitle:'记录', segDoses:'用药', segWeights:'体重',
   addInj:'记录用药', editInj:'编辑用药', addWeight:'记录体重', editWeight:'编辑体重',
-  drug:'药品', sema:'司美格鲁肽', tirz:'替尔泊肽', oral:'口服药', custom:'其他',
-  semaShort:'司美', tirzShort:'替尔泊', oralShort:'口服', customShort:'其他',
+  drug:'药品', sema:'司美格鲁肽', tirz:'替尔泊肽', lira:'利拉鲁肽', dula:'度拉糖肽', oral:'口服药', custom:'其他',
+  semaShort:'司美', tirzShort:'替尔泊', liraShort:'利拉', dulaShort:'度拉', oralShort:'口服', customShort:'其他',
   customName:'药品名称', customNamePh:'例如：利拉鲁肽',
   brand:'商品名（可选）', brandNote:'仅用于记录，与任何药企无关', presetsLabel:'快捷输入（不是剂量建议，请按医嘱填写）',
   dose:'剂量', doseMg:'剂量（mg）', time:'时间', date:'日期', note:'备注', notePh:'可选：感受、饮食、状态…',
@@ -662,7 +717,7 @@ const I18N = {
   logTitle:'Log', segDoses:'Doses', segWeights:'Weight',
   addInj:'Log dose', editInj:'Edit dose', addWeight:'Log weight', editWeight:'Edit weight',
   drug:'Medication', sema:'Semaglutide', tirz:'Tirzepatide', oral:'Oral', custom:'Other',
-  semaShort:'Sema', tirzShort:'Tirz', oralShort:'Oral', customShort:'Other',
+  semaShort:'Sema', tirzShort:'Tirz', liraShort:'Lira', dulaShort:'Dula', oralShort:'Oral', customShort:'Other',
   customName:'Medication name', customNamePh:'e.g. Liraglutide',
   brand:'Brand (optional)', brandNote:'For logging only; not affiliated with any manufacturer', presetsLabel:'Quick fill (not a dose recommendation; enter what your clinician prescribed)',
   dose:'Dose', doseMg:'Dose (mg)', time:'Time', date:'Date', note:'Note', notePh:'Optional: how you feel, food, energy…',
@@ -747,11 +802,11 @@ Object.assign(I18N.zh,{
  nextDose:'下次打针 / 吃药', inDays:'还有 {n} 天', inHours:'还有 {n} 小时', inMins:'还有 {n} 分钟', dueNowTxt:'现在到时间了', overdueTxt:'已超过 {t}', scheduled:'预定 {t}',
  weekChip:'本周 {v}', quickTitle:'快速操作', qWeight:'记录体重', qDose:'记录用药', qNote:'写笔记', qCal:'打开日历', qCheck:'今日状况', qCheckSub:'食欲和副作用，10 秒记完',
  noticeLead:'请注意：', disclaimerShort:'本应用仅用于个人记录，不能替代医生的诊断、处方或用药建议。剂量由你自行填写。',
- emptyHomeTitle:'从一条记录开始', emptyHomeBody:'先记下今天的体重或一次用药。这里只保存你填写的内容，不会给出剂量建议。',
+ emptyHomeTitle:'还没有记录', emptyHomeBody:'先记一次体重或一次用药。这里只保存你填写的内容。',
  emptyNotesTitle:'还没有笔记', emptyNotesBody:'写下用药或体重变化时的感受，只保存在你这台设备的记录里。',
  emptyMeds:'还没有用药记录。记下一次注射或口服药后，这里会显示历史和下次时间。', emptyFirst:'记录第一条',
- medsTitle:'用药', medType:'药品类型', inj:'注射', oralType:'口服', medName:'药品', medNameHint:'名称由你选择或填写，仅用于记录。', oralNamePh:'例如：口服司美格鲁肽',
- doseHint:'快捷输入只是方便填写，不是剂量建议。请按医嘱自行填写。', siteOpt:'注射部位（可选）', noteFx:'备注 / 副作用',
+ medsTitle:'用药', medType:'药品类型', inj:'注射', oralType:'口服', medName:'药品', medNameHint:'点此选择药物，也可添加自定义。剂量请按医嘱自行填写，应用不推荐剂量。', oralNamePh:'例如：口服司美格鲁肽',
+ doseHint:'剂量请按医嘱自行填写，应用不推荐、不预填剂量。', siteOpt:'注射部位（可选）', noteFx:'备注 / 副作用',
  abdL:'腹部左侧', abdR:'腹部右侧', thighL:'左大腿', thighR:'右大腿', armL:'左上臂', armR:'右上臂',
  saveRecord:'保存记录', saveWeight:'保存体重', back:'返回',
  fx_nausea:'恶心', fx_vomit:'呕吐', fx_constip:'便秘', fx_diarrhea:'腹泻', fx_bloat:'胃胀', fx_fatigue:'乏力', fx_headache:'头痛', fx_site:'注射部位反应',
@@ -774,7 +829,14 @@ Object.assign(I18N.zh,{
  pinNew:'输入新 PIN（4–6 位数字）', pinAgain:'再输入一次', pinErrLen:'PIN 需为 4–6 位数字', pinErrMatch:'两次输入不一致', pinSaved:'隐私锁已开启', pinRemoved:'隐私锁已关闭',
  lockTitle:'输入 PIN 解锁', lockErr:'PIN 不正确', unlock:'解锁', forgotPin:'忘记 PIN？', forgotAcc:'用账号密码重置', forgotGuest:'本地使用模式无法找回 PIN，只能清除本机数据后重新开始。', clearLocal:'清除本机数据', resetPwdPh:'账号密码', resetPin:'重置 PIN',
  aboutRow:'曲线 / Curve', versionTxt:'版本 {v}',
- disclaimer:'本应用仅用于个人记录，不能替代医生的诊断、处方或用药建议。剂量由你自行填写；剂量快捷选项只是输入方便，不是建议。药品名和商品名（如诺和泰、诺和盈、穆峰达）仅用于记录，与任何药企无关。',
+ disclaimer:'本应用仅用于个人记录，不能替代医生的诊断、处方或用药建议。剂量由你自行填写。药品名和商品名（如诺和泰、诺和盈、穆峰达）仅用于记录，与任何药企无关。',
+ logBtn:'记录', logWhat:'记录什么？', disclaimerLine:'只作个人记录，不替代医嘱。',
+ pickMed:'选择药物', pickMedPh:'选择药物', searchMed:'搜索通用名或商品名', frequent:'常用',
+ addCustomMed:'添加自定义药物', customMedHint:'填写通用名或商品名，剂量仍由你自行填写',
+ customMedName:'药物名称', customMedNamePh:'通用名或商品名', noMedMatch:'没有匹配的药物',
+ totalChange:'累计变化', weeklyAvg:'每周平均',
+ trademarkNote:'商品名 Ozempic、Wegovy、Rybelsus、Mounjaro、Zepbound、Victoza、Saxenda、Trulicity 以及诺和泰、诺和盈、穆峰达等为各权利人的注册商标，此处仅作药名文字，不使用其标识或配色，也不代表合作或背书。列表只帮助你记录，不推荐药品或剂量。',
+ otherGroup:'其他',
 });
 Object.assign(I18N.en,{
  tagline:'Log injections, oral doses and weight. Just for you.', appNameEn:'CURVE',
@@ -785,11 +847,11 @@ Object.assign(I18N.en,{
  nextDose:'Next injection / dose', inDays:'In {n} days', inHours:'In {n} hours', inMins:'In {n} min', dueNowTxt:'Due now', overdueTxt:'{t} overdue', scheduled:'Scheduled {t}',
  weekChip:'This week {v}', quickTitle:'Quick actions', qWeight:'Log weight', qDose:'Log medication', qNote:'Write a note', qCal:'Open calendar', qCheck:'Daily check-in', qCheckSub:'Appetite and side effects in 10 seconds',
  noticeLead:'Please note: ', disclaimerShort:'This app is for personal record-keeping only. It does not replace medical advice, a diagnosis, or a prescription. You enter your own dose.',
- emptyHomeTitle:'Start with one record', emptyHomeBody:'Log today\u2019s weight or a dose. The app only stores what you enter, and never suggests a dose.',
+ emptyHomeTitle:'No records yet', emptyHomeBody:'Start by logging a weight or a dose. The app only stores what you enter.',
  emptyNotesTitle:'No notes yet', emptyNotesBody:'Write how a dose or a weigh-in felt. Notes stay in your records on this device.',
  emptyMeds:'No doses yet. After you log an injection or pill, history and the next time show up here.', emptyFirst:'Log the first one',
- medsTitle:'Meds', medType:'Medication type', inj:'Injection', oralType:'Oral', medName:'Medication', medNameHint:'Pick or type the name; it\u2019s only for your records.', oralNamePh:'e.g. Oral semaglutide',
- doseHint:'Quick fill is only a typing shortcut, not a dose recommendation. Enter what your clinician prescribed.', siteOpt:'Injection site (optional)', noteFx:'Notes / side effects',
+ medsTitle:'Meds', medType:'Medication type', inj:'Injection', oralType:'Oral', medName:'Medication', medNameHint:'Tap to choose a medication, or add a custom one. Enter the dose yourself; the app does not recommend doses.', oralNamePh:'e.g. Oral semaglutide',
+ doseHint:'Enter the dose your clinician prescribed. The app does not prefill or recommend a dose.', siteOpt:'Injection site (optional)', noteFx:'Notes / side effects',
  abdL:'Left abdomen', abdR:'Right abdomen', thighL:'Left thigh', thighR:'Right thigh', armL:'Left upper arm', armR:'Right upper arm',
  saveRecord:'Save record', saveWeight:'Save weight', back:'Back',
  fx_nausea:'Nausea', fx_vomit:'Vomiting', fx_constip:'Constipation', fx_diarrhea:'Diarrhea', fx_bloat:'Bloating', fx_fatigue:'Fatigue', fx_headache:'Headache', fx_site:'Site reaction',
@@ -812,7 +874,14 @@ Object.assign(I18N.en,{
  pinNew:'New PIN (4–6 digits)', pinAgain:'Enter it again', pinErrLen:'PIN must be 4–6 digits', pinErrMatch:'The PINs don\u2019t match', pinSaved:'Privacy lock is on', pinRemoved:'Privacy lock is off',
  lockTitle:'Enter PIN to unlock', lockErr:'Wrong PIN', unlock:'Unlock', forgotPin:'Forgot PIN?', forgotAcc:'Reset with account password', forgotGuest:'In local mode the PIN can\u2019t be recovered; you can only clear this device\u2019s data and start over.', clearLocal:'Clear local data', resetPwdPh:'Account password', resetPin:'Reset PIN',
  aboutRow:'曲线 / Curve', versionTxt:'Version {v}',
- disclaimer:'This app is for personal record-keeping only. It does not replace medical advice, a diagnosis, or a prescription. You enter your own dose; dose presets are typing shortcuts, not recommendations. Drug and brand names are for logging only; Curve is not affiliated with any manufacturer.',
+ disclaimer:'This app is for personal record-keeping only. It does not replace medical advice, a diagnosis, or a prescription. You enter your own dose. Drug and brand names are for logging only; Curve is not affiliated with any manufacturer.',
+ logBtn:'Log', logWhat:'What would you like to log?', disclaimerLine:'For personal records only. Not medical advice.',
+ pickMed:'Choose medication', pickMedPh:'Choose a medication', searchMed:'Search generic or brand name', frequent:'Frequent',
+ addCustomMed:'Add a custom medication', customMedHint:'Enter a generic or brand name. You still enter the dose yourself.',
+ customMedName:'Medication name', customMedNamePh:'Generic or brand name', noMedMatch:'No matching medications',
+ totalChange:'Total change', weeklyAvg:'Weekly average',
+ trademarkNote:'Ozempic, Wegovy, Rybelsus, Mounjaro, Zepbound, Victoza, Saxenda and Trulicity are trademarks of their respective owners. Names are shown as text only, without logos or brand colors, and do not imply affiliation or endorsement. This list is for logging only and does not recommend a medication or dose.',
+ otherGroup:'Other',
 });
 /* ---------------- Auth (simulated, local only) ---------------- */
 const Auth={
@@ -835,7 +904,8 @@ const Auth={
 const SCHEMA=1;
 function defaultData(){return {schema:SCHEMA,
  profile:{lang:'zh',unit:'kg',heightCm:null,startKg:null,goalKg:null,meds:[],notif:false,hideNames:false,pinHash:null,pinSalt:null,
-  schedule:{sema:{interval:7,weekday:-1,time:'20:00'},tirz:{interval:7,weekday:-1,time:'20:00'},oral:{interval:1,weekday:-1,time:'08:00'},custom:{interval:7,weekday:-1,time:'20:00'}},
+  schedule:{sema:{interval:7,weekday:-1,time:'20:00'},tirz:{interval:7,weekday:-1,time:'20:00'},lira:{interval:7,weekday:-1,time:'20:00'},dula:{interval:7,weekday:-1,time:'20:00'},oral:{interval:1,weekday:-1,time:'08:00'},custom:{interval:7,weekday:-1,time:'20:00'}},
+  customMeds:[],
   updatedAt:new Date().toISOString()},
  doses:[],weights:[],notes:[],checkins:[],deleted:[],notified:{}};}
 const Store={
@@ -856,19 +926,95 @@ const Store={
 const P=()=>Store.d.profile;
 
 /* ---------------- Domain ---------------- */
-const DRUGS=['sema','tirz','oral','custom'];
-const PRESETS={sema:[0.25,0.5,1,1.7,2.4],tirz:[2.5,5,7.5,10,12.5,15],oral:[3,7,14],custom:[]};
+const DRUGS=['sema','tirz','lira','dula','oral','custom'];
+const PRESETS={sema:[0.25,0.5,1,1.7,2.4],tirz:[2.5,5,7.5,10,12.5,15],lira:[],dula:[],oral:[3,7,14],custom:[]};
 const SITES=['abdL','abdR','thighL','thighR','armL','armR'];
 const FX=['nausea','vomit','constip','diarrhea','bloat','fatigue','headache','site'];
 /* effects are [{k,sev}] (sev 1–3); custom tags use k='c:<text>'. Old string arrays are normalised. */
 const normFx=a=>(a||[]).filter(x=>x&&x!=='none').map(x=>typeof x==='string'?{k:x,sev:1}:x);
 const fxLabel=e=>e.k.startsWith('c:')?e.k.slice(2):t('fx_'+e.k);
 const fxText=a=>normFx(a).map(e=>fxLabel(e)+(e.sev>1?'·'+t('sev'+e.sev):'')).join('、');
-const BRANDS={sema:[{k:'ozempic',zh:'诺和泰',en:'Ozempic'},{k:'wegovy',zh:'诺和盈',en:'Wegovy'}],tirz:[{k:'mounjaro',zh:'穆峰达',en:'Mounjaro'}],oral:[],custom:[]};
-const brandName=r=>{const b=(BRANDS[r.drug]||[]).find(x=>x.k===r.brand);return b?b[LANG==='zh'?'zh':'en']:'';};
+const BRANDS={
+ sema:[{k:'ozempic',zh:'Ozempic / 诺和泰',en:'Ozempic'},{k:'wegovy',zh:'Wegovy / 诺和盈',en:'Wegovy'}],
+ tirz:[{k:'mounjaro',zh:'Mounjaro / 穆峰达',en:'Mounjaro'},{k:'zepbound',zh:'Zepbound',en:'Zepbound'}],
+ lira:[{k:'victoza',zh:'Victoza',en:'Victoza'},{k:'saxenda',zh:'Saxenda',en:'Saxenda'}],
+ dula:[{k:'trulicity',zh:'Trulicity',en:'Trulicity'}],
+ oral:[{k:'rybelsus',zh:'Rybelsus',en:'Rybelsus'},{k:'wegovy-tab',zh:'Wegovy 片剂',en:'Wegovy tablet'}],
+ custom:[]
+};
+const MED_CATALOG=[
+ {id:'sema-ozempic',generic:'sema',brand:'ozempic',route:'inj',zh:{gen:'司美格鲁肽',brand:'Ozempic / 诺和泰'},en:{gen:'Semaglutide',brand:'Ozempic'}},
+ {id:'sema-wegovy',generic:'sema',brand:'wegovy',route:'inj',zh:{gen:'司美格鲁肽',brand:'Wegovy / 诺和盈'},en:{gen:'Semaglutide',brand:'Wegovy'}},
+ {id:'sema-wegovy-tab',generic:'oral',brand:'wegovy-tab',route:'oral',zh:{gen:'司美格鲁肽',brand:'Wegovy 片剂'},en:{gen:'Semaglutide',brand:'Wegovy tablet'}},
+ {id:'sema-rybelsus',generic:'oral',brand:'rybelsus',route:'oral',zh:{gen:'司美格鲁肽',brand:'Rybelsus'},en:{gen:'Semaglutide',brand:'Rybelsus'}},
+ {id:'sema-oral-other',generic:'oral',brand:'',route:'oral',other:true,zh:{gen:'口服司美格鲁肽',brand:'其他 / 未列出的商品名'},en:{gen:'Oral semaglutide',brand:'Other / not listed'}},
+ {id:'tirz-mounjaro',generic:'tirz',brand:'mounjaro',route:'inj',zh:{gen:'替尔泊肽',brand:'Mounjaro / 穆峰达'},en:{gen:'Tirzepatide',brand:'Mounjaro'}},
+ {id:'tirz-zepbound',generic:'tirz',brand:'zepbound',route:'inj',zh:{gen:'替尔泊肽',brand:'Zepbound'},en:{gen:'Tirzepatide',brand:'Zepbound'}},
+ {id:'lira-victoza',generic:'lira',brand:'victoza',route:'inj',zh:{gen:'利拉鲁肽',brand:'Victoza'},en:{gen:'Liraglutide',brand:'Victoza'}},
+ {id:'lira-saxenda',generic:'lira',brand:'saxenda',route:'inj',zh:{gen:'利拉鲁肽',brand:'Saxenda'},en:{gen:'Liraglutide',brand:'Saxenda'}},
+ {id:'dula-trulicity',generic:'dula',brand:'trulicity',route:'inj',zh:{gen:'度拉糖肽',brand:'Trulicity'},en:{gen:'Dulaglutide',brand:'Trulicity'}}
+];
+const GENERIC_GROUPS=[
+ {k:'sema',zh:'司美格鲁肽  ·  Semaglutide',en:'Semaglutide  ·  司美格鲁肽',ids:['sema-ozempic','sema-wegovy','sema-wegovy-tab','sema-rybelsus','sema-oral-other']},
+ {k:'tirz',zh:'替尔泊肽  ·  Tirzepatide',en:'Tirzepatide  ·  替尔泊肽',ids:['tirz-mounjaro','tirz-zepbound']},
+ {k:'lira',zh:'利拉鲁肽  ·  Liraglutide',en:'Liraglutide  ·  利拉鲁肽',ids:['lira-victoza','lira-saxenda']},
+ {k:'dula',zh:'度拉糖肽  ·  Dulaglutide',en:'Dulaglutide  ·  度拉糖肽',ids:['dula-trulicity']}
+];
+const medText=m=>{const loc=m[LANG==='zh'?'zh':'en']||m.zh;return {gen:loc.gen,brand:loc.brand};};
+function findMed(id){
+ if(!id)return null;
+ const c=MED_CATALOG.find(m=>m.id===id);if(c)return c;
+ const u=(P().customMeds||[]).find(m=>m.id===id);
+ if(u)return {id:u.id,generic:'custom',brand:'',route:u.route||'inj',custom:true,zh:{gen:u.name,brand:''},en:{gen:u.name,brand:''}};
+ return null;
+}
+function matchMed(r){
+ if(!r)return null;
+ if(r.medId){const m=findMed(r.medId);if(m)return m;}
+ if(r.drug==='custom'&&r.customName){
+  const u=(P().customMeds||[]).find(m=>m.name===r.customName);if(u)return findMed(u.id);
+  return {id:'adhoc-'+r.customName,generic:'custom',brand:'',route:r.route||'inj',custom:true,zh:{gen:r.customName,brand:''},en:{gen:r.customName,brand:''}};
+ }
+ return MED_CATALOG.find(m=>m.brand&&m.brand===r.brand&&(m.generic===r.drug||(r.drug==='sema'&&m.generic==='oral'&&m.route==='oral')))
+  || MED_CATALOG.find(m=>m.brand&&m.brand===r.brand)
+  || (r.drug==='oral'&&!r.brand?MED_CATALOG.find(m=>m.id==='sema-oral-other'):null)
+  || null;
+}
+function brandName(r){
+ const m=matchMed(r);if(m&&medText(m).brand)return medText(m).brand;
+ if(r&&r.brand){for(const arr of Object.values(BRANDS)){const b=arr.find(x=>x.k===r.brand);if(b)return b[LANG==='zh'?'zh':'en'];}}
+ return '';
+}
 const MOODS=['😣','😕','😐','🙂','😄'];
-const drugName=(r)=>r.drug==='custom'&&r.customName?r.customName:t(r.drug);
-const isInjection=d=>d!=='oral';
+function drugName(r){
+ if(!r)return '';
+ const m=matchMed(r);if(m)return medText(m).gen;
+ if((r.drug==='custom'||r.drug==='oral')&&r.customName)return r.customName;
+ return t(r.drug);
+}
+function isInjection(d){
+ if(d&&typeof d==='object'){
+  if(d.route==='oral'||d.route==='inj')return d.route==='inj';
+  const m=matchMed(d);if(m)return m.route==='inj';
+  return d.drug!=='oral';
+ }
+ return d!=='oral';
+}
+function frequentMeds(){
+ const seen=new Set();const out=[];
+ for(const d of sortedDoses().slice().reverse()){
+  const m=matchMed(d);
+  const id=m?m.id:(d.drug+'|'+(d.brand||'')+'|'+(d.customName||''));
+  if(seen.has(id))continue;seen.add(id);
+  out.push(m||{id,generic:d.drug,brand:d.brand||'',route:isInjection(d)?'inj':'oral',zh:{gen:drugName(d),brand:brandName(d)},en:{gen:drugName(d),brand:brandName(d)}});
+  if(out.length>=4)break;
+ }
+ return out;
+}
+function catalogPlusCustom(){
+ const extra=(P().customMeds||[]).map(u=>findMed(u.id)).filter(Boolean);
+ return MED_CATALOG.concat(extra);
+}
 
 const W={ // weight unit helpers
  toDisp(kg){const u=P().unit;return u==='lb'?kg*KG_LB:u==='jin'?kg*2:kg},
@@ -905,7 +1051,7 @@ function nextDue(drug){
 function reminders(){return activeMeds().map(nextDue).sort((a,b)=>(a.due?a.due:Infinity)-(b.due?b.due:Infinity));}
 function fmtSpan(ms){const m=Math.max(0,Math.round(ms/60000));const d=Math.floor(m/1440),h=Math.floor((m%1440)/60),mi=m%60;
  if(d>0)return LANG==='zh'?`${d} 天 ${h} 小时`:`${d}d ${h}h`;if(h>0)return LANG==='zh'?`${h} 小时 ${mi} 分钟`:`${h}h ${mi}m`;return LANG==='zh'?`${mi} 分钟`:`${mi} min`;}
-function suggestSite(){const inj=sortedDoses().filter(d=>isInjection(d.drug)&&d.site);if(!inj.length)return {last:null,next:null};const last=inj[inj.length-1].site;const next=SITES[(SITES.indexOf(last)+1)%SITES.length];return {last,next};}
+function suggestSite(){const inj=sortedDoses().filter(d=>isInjection(d)&&d.site);if(!inj.length)return {last:null,next:null};const last=inj[inj.length-1].site;const next=SITES[(SITES.indexOf(last)+1)%SITES.length];return {last,next};}
 function bmi(kg){const h=P().heightCm;if(!h||!kg)return null;return kg/Math.pow(h/100,2);}
 /* ---------------- Icons: stroke 1.75, from the design handoff ---------------- */
 const sv=(inner,extra='')=>`<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" ${extra}>${inner}</svg>`;
@@ -930,6 +1076,8 @@ const IC={
  share:sv('<path d="M12 3.5v11M7.5 8 12 3.5 16.5 8M5 12.5v6A1.5 1.5 0 0 0 6.5 20h11a1.5 1.5 0 0 0 1.5-1.5v-6"/>'),
  heart:sv('<path d="M12 20s-7.5-4.4-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.6-7.5 10-7.5 10z"/>'),
  lock:sv('<rect x="5" y="10.5" width="14" height="10" rx="2.2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/>'),
+ search:sv('<circle cx="11" cy="11" r="6.2"/><path d="M16 16.5 20 20.5"/>'),
+ tick:sv('<path d="M5.5 12.5 10 17l8.5-9"/>'),
  trash:sv('<path d="M4.5 7h15M9.5 7V4.8h5V7M6.5 7l.9 12.2a1.5 1.5 0 0 0 1.5 1.3h6.2a1.5 1.5 0 0 0 1.5-1.3L17.5 7"/>'),
  curveInd:'<svg class="curve-ind" viewBox="0 0 16 3" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M1 2c3-.2 4.2 1 7-.4C11 .3 12.2.2 15 1"/></svg>'
 };
@@ -997,18 +1145,30 @@ function renderApp(){
  if(S.locked){renderLock();return;}
  BIND=null;
  if(S.page){
-  const v={dose:viewDoseForm,weight:viewWeightForm,note:viewNoteForm,check:viewCheckForm,settings:viewSettings,pin:viewPinForm,createAcc:viewCreateAcc}[S.page.k](S.page);
+  const v={dose:viewDoseForm,weight:viewWeightForm,note:viewNoteForm,check:viewCheckForm,settings:viewSettings,pin:viewPinForm,createAcc:viewCreateAcc,medPicker:viewMedPicker,customMed:viewCustomMed}[S.page.k](S.page);
   $('#app').innerHTML=`<main class="screen page" id="screen">${v}</main>`;
  }else{
   const tabs=[['home','tabHome'],['meds','tabMeds'],['trend','tabTrend'],['cal','tabCal'],['notes','tabNotes']];
   const v={home:viewHome,meds:viewMeds,trend:viewTrend,cal:viewCal,notes:viewNotes}[S.tab]();
-  $('#app').innerHTML=`<main class="screen" id="screen">${v}</main>
+  $('#app').innerHTML=`<main class="screen${S.tab==='home'?' home':''}" id="screen">${v}</main>
   <nav class="tabbar" aria-label="${LANG==='zh'?'主导航':'Main'}"><div class="in">${tabs.map(([k,l])=>`<button class="tab" data-act="tab" data-v="${k}" ${S.tab===k?'aria-current="page"':''}>${IC.curveInd}${IC[k==='meds'?'meds':k]}<span>${t(l)}</span></button>`).join('')}</div></nav>`;
  }
  if(BIND)BIND();
 }
 function go(page){page.back=S.page||null;S.page=page;renderApp();window.scrollTo(0,0);}
-function goBack(){S.page=S.page&&S.page.back||null;renderApp();}
+function goBack(){const leaving=S.page&&S.page.k;S.page=S.page&&S.page.back||null;if(leaving==='dose')S.doseDraft=null;renderApp();}
+function goBackTo(k){let p=S.page;while(p&&p.k!==k&&p.back)p=p.back;S.page=(p&&p.k===k)?p:null;renderApp();}
+function closeSheet(){const m=$('#recordSheet');if(m)m.remove();}
+function openRecordSheet(){
+ if($('#recordSheet'))return;
+ const items=[['addWeight','sheetWeight',IC.scale,t('qWeight')],['addDose','sheetDose',IC.meds,t('qDose')],['addNote','sheetNote',IC.notes,t('qNote')]];
+ $('#app').insertAdjacentHTML('beforeend', `<div class="sheet-mask" id="recordSheet" role="presentation"><div class="sheet glass-strong" role="dialog" aria-label="${t('logWhat')}" id="recordDialog">
+  <div class="sheet-handle"></div><div class="sheet-title">${t('logWhat')}</div>
+  ${items.map(([act,id,ic,lab])=>`<button type="button" class="sheet-item" data-act="${act}" id="${id}"><span class="glyph">${ic}</span><span>${lab}</span></button>`).join('')}
+  <button type="button" class="sheet-cancel" id="sheetCancel" data-act="closeSheet">${t('cancel')}</button>
+ </div></div>`);
+ $('#recordSheet').addEventListener('click',e=>{if(e.target.id==='recordSheet')closeSheet();});
+}
 
 /* ---------------- Home ---------------- */
 function countdownText(r,now){
@@ -1020,47 +1180,39 @@ function countdownText(r,now){
  if(ms>=3600000){const h=Math.floor(ms/3600000);return {big:LANG==='en'&&h===1?'In 1 hour':t('inHours',{n:h})};}
  return {big:t('inMins',{n:Math.ceil(ms/60000)})};
 }
-function doseLabel(d){if(!d)return '';const b=brandName(d);return `${esc(drugName(d))}${b?'（'+esc(b)+'）':''}${isInjection(d.drug)?(LANG==='zh'?'注射':''):''} · ${d.dose} mg`;}
+function doseLabel(d){if(!d)return '';const b=brandName(d);return `${esc(drugName(d))}${b?' · '+esc(b):''} · ${d.dose} mg`;}
 function viewHome(){
- const now=new Date();const lw=latestWeight();const sk=startKg();const wk=weekChange();const goal=P().goalKg;
+ const now=new Date();const lw=latestWeight();const wk=weekChange();
  const rems=reminders();const r0=rems.find(r=>r.due)||rems[0];
  const hasAny=Store.list('doses').length||Store.list('weights').length;
  const dateStr=fmtDate(now)+' '+(LANG==='zh'?'星期'+'一二三四五六日'[wdIndex(now)]:['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'][wdIndex(now)]);
- let h=largeNav(t('homeTitle'),`<button class="icon-btn neutral" data-act="openSettings" aria-label="${t('settings')}" id="btnSettings">${IC.gear}</button>`)+
- `<div class="stack"><div class="greeting row-spread"><div><div class="hello">${Store.user.guest?t('helloAnon'):t('helloAnon')}</div><div class="date">${dateStr}</div></div>${sampleTag()}</div>`;
- // due banners
- h+=rems.filter(r=>r.due&&r.due-now<=2*3600000).map(r=>{const over=r.due<now;return `<div class="banner glass ${over?'over':''}"><div class="grow"><b>${t('dueBannerTitle',{d:esc(drugName(r.last))})}</b><span>${over?t('overdueTxt',{t:fmtSpan(now-r.due)}):t('scheduled',{t:hm(r.due)})}</span></div><button class="btn sm" data-act="addDose" data-type="${r.drug==='oral'?'oral':'inj'}" data-drug="${r.drug}">${t('markDone')}</button></div>`;}).join('');
+ let h=`<div class="nav"><div class="nav-title">${t('homeTitle')}</div><button class="icon-btn neutral" data-act="openSettings" aria-label="${t('settings')}" id="btnSettings">${IC.gear}</button></div>
+ <div class="home-fit"><div class="stack">
+ <div class="row-spread" style="align-items:center"><div class="home-greet">${dateStr}</div>${sampleTag()}</div>`;
  if(!hasAny){
-  h+=`<section class="card glass"><div class="empty"><div class="glyph-lg">${IC.trend}</div><h2>${t('emptyHomeTitle')}</h2><p>${t('emptyHomeBody')}</p><div class="btns"><button class="btn block" data-act="addWeight" id="qWeight">${t('qWeight')}</button><button class="btn secondary block" data-act="addDose" id="qInj">${t('qDose')}</button></div></div></section>`;
+  h+=`<section class="card glass" id="emptyHome"><div class="empty" style="padding:18px 8px 8px"><div class="glyph-lg">${IC.trend}</div><h2>${t('emptyHomeTitle')}</h2><p>${t('emptyHomeBody')}</p></div></section>`;
  }else{
-  h+=`<section class="card glass" id="curWeight" aria-label="${t('currentWeight')}"><div class="card-label">${t('currentWeight')}</div>
+  h+=`<section class="card glass weight-main" id="curWeight" aria-label="${t('currentWeight')}"><div class="card-label">${t('currentWeight')}</div>
    ${lw?`<div class="hero-weight"><div class="n">${W.fmt(lw.kg)}</div><div class="u">${W.u()}</div></div>`:`<div class="hero-weight"><div class="n" style="color:var(--color-text-muted)">—</div></div>`}
-   <div class="row" style="flex-wrap:wrap" id="weekChange">${wk!=null?deltaChip(wk,t('weekChip')):''}${lw&&sk!=null&&(P().startKg||sortedWeights().length>1)?`<span class="meta">${W.delta(lw.kg-sk)} ${W.u()} ${t('sinceStart')}</span>`:''}${!lw?`<span class="meta">${t('noWeight')}</span>`:''}</div></section>`;
+   <div class="row" style="flex-wrap:wrap" id="weekChange">${wk!=null?deltaChip(wk,t('weekChip')):''}${!lw?`<span class="meta">${t('noWeight')}</span>`:''}</div></section>`;
   const cd=r0?countdownText(r0,now):null;
   h+=`<section class="card glass" id="heroCard" aria-label="${t('nextDose')}"><div class="card-label">${t('nextDose')}</div>
    ${!r0?`<div class="countdown" style="font-size:var(--fs-title3)">${t('noSchedule')}</div><div class="meta">${t('noScheduleHint')}</div>`
-   :!r0.due?`<div class="countdown" style="font-size:var(--fs-title3)">${esc(t(r0.drug))}</div><div class="meta">${t('firstDoseHint')}</div>`
-   :`<div class="countdown ${cd.over?'over':''}" id="heroBig">${cd.big}</div><div class="meta"><strong>${doseLabel(r0.last)}</strong></div><div class="meta" style="margin-top:2px">${t('scheduled',{t:fmtDate(r0.due)+' '+hm(r0.due)})}</div>`}
-   ${rems.filter(r=>r!==r0&&r.due).map(r=>`<div class="meta" style="margin-top:8px">${esc(drugName(r.last))}：${fmtDate(r.due)} ${hm(r.due)}</div>`).join('')}</section>`;
+   :!r0.due?`<div class="countdown" style="font-size:var(--fs-title3)">${esc(drugName({drug:r0.drug}))}</div><div class="meta">${t('firstDoseHint')}</div>`
+   :`<div class="countdown ${cd.over?'over':''}" id="heroBig">${cd.big}</div><div class="meta"><strong>${doseLabel(r0.last)}</strong></div><div class="meta" style="margin-top:2px">${fmtDate(r0.due)+' '+hm(r0.due)}</div>`}</section>`;
  }
- h+=`<div class="section-title">${t('quickTitle')}</div><div class="actions">
-  <button class="action glass" data-act="addWeight" id="qaWeight"><span class="glyph">${IC.scale}</span><span class="l">${t('qWeight')}</span></button>
-  <button class="action glass" data-act="addDose" id="qaDose"><span class="glyph">${IC.meds}</span><span class="l">${t('qDose')}</span></button>
-  <button class="action glass" data-act="addNote" id="qaNote"><span class="glyph">${IC.notes}</span><span class="l">${t('qNote')}</span></button>
-  <button class="action glass" data-act="tab" data-v="cal" id="qaCal"><span class="glyph">${IC.cal}</span><span class="l">${t('qCal')}</span></button>
-  <button class="action glass wide" data-act="addCheck" id="qaCheck"><span class="glyph">${IC.heart}</span><span class="l">${t('qCheck')}<small>${t('qCheckSub')}</small></span></button></div>`;
- if(lw&&goal&&sk){const pct=sk===goal?100:Math.max(0,Math.min(100,(sk-lw.kg)/(sk-goal)*100));const left=lw.kg-goal;
-  h+=`<section class="card glass"><div class="row-spread"><span class="card-label">${t('goalProgress')}</span><span class="meta"><strong>${left<=0?t('goalReached'):t('toGoal',{v:W.fmt(left)+' '+W.u()})}</strong></span></div><div class="progress"><i style="width:${pct.toFixed(0)}%"></i></div><div class="row-spread meta" style="margin-top:6px"><span>${W.fmt(sk)}</span><span class="num">${pct.toFixed(0)}%</span><span>${t('goal')} ${W.fmt(goal)}</span></div></section>`;}
- h+=notice()+'</div>';
+ h+=`<button type="button" class="btn block plus-record" id="btnRecord" data-act="openSheet" aria-haspopup="dialog">${IC.plus} ${t('logBtn')}</button>
+ <p class="disclaimer-line">${t('disclaimerLine')}</p>
+ </div></div>`;
  return h;
 }
 
 /* ---------------- Meds tab ---------------- */
-function doseRow(d){const dt=parseLocal(d.at);const fx=fxText(d.effects);const inj=isInjection(d.drug);
+function doseRow(d){const dt=parseLocal(d.at);const fx=fxText(d.effects);const inj=isInjection(d);
  return `<button class="list-row" data-act="editDose" data-id="${d.id}"><span class="mark">${inj?IC.syringe:IC.pill}</span><span class="grow"><div class="title">${esc(drugName(d))}${brandName(d)?'（'+esc(brandName(d))+'）':''} · ${d.dose} mg</div><div class="sub">${fmtDateY(dt)} ${hm(dt)}${d.site?' · '+t(d.site):''}${d.appetite?' · '+t('appetiteN',{n:d.appetite}):''}${fx?' · '+esc(fx):''}${d.note?' · '+esc(d.note):''}</div></span>${IC.chev}</button>`;}
 function viewMeds(){
  const ds=sortedDoses().reverse();const rems=reminders().filter(r=>r.due);const now=new Date();
- let h=largeNav(t('medsTitle'),`<button class="icon-btn" data-act="addDose" aria-label="${t('qDose')}" id="btnAddLog">${IC.plus}</button>`)+'<div class="stack">';
+ let h=largeNav(t('medsTitle'),`<button class="icon-btn" data-act="addCheck" aria-label="${t('qCheck')}" id="btnCheck">${IC.heart}</button><button class="icon-btn" data-act="addDose" aria-label="${t('qDose')}" id="btnAddLog">${IC.plus}</button>`)+'<div class="stack">';
  if(rems.length)h+=`<section class="card glass"><div class="card-label">${t('nextDose')}</div>${rems.map(r=>{const c=countdownText(r,now);return `<div class="row-spread" style="margin-top:8px"><div><div class="meta"><strong>${doseLabel(r.last)}</strong></div><div class="meta">${t('scheduled',{t:fmtDate(r.due)+' '+hm(r.due)})}</div></div><span class="sample" style="font-size:12px">${c.big}</span></div>`;}).join('')}</section>`;
  h+=ds.length?`<div class="list glass" id="doseList">${ds.map(doseRow).join('')}</div>`
   :`<section class="card glass"><div class="empty"><div class="glyph-lg">${IC.meds}</div><p>${t('emptyMeds')}</p><div class="btns"><button class="btn block" data-act="addDose">${t('emptyFirst')}</button></div></div></section>`;
@@ -1071,7 +1223,7 @@ function viewMeds(){
 function checkRow(c){const fx=fxText(c.effects);return `<button class="list-row" data-act="editCheck" data-id="${c.id}"><span class="mark">${IC.heart}</span><span class="grow"><div class="title">${fmtDateY(c.date)}</div><div class="sub">${c.appetite?t('appetiteN',{n:c.appetite}):''}${fx?(c.appetite?' · ':'')+esc(fx):''}${c.note?' · '+esc(c.note):''}</div></span>${IC.chev}</button>`;}
 /* ---------------- Calendar (Sunday first, shape markers) ---------------- */
 function dayMarks(){const m={};const add=(k,ty)=>{(m[k]=m[k]||new Set()).add(ty);};
- Store.list('doses').forEach(d=>add(d.at.slice(0,10),d.drug==='oral'?'oral':'inj'));Store.list('weights').forEach(w=>add(w.date,'weight'));return m;}
+ Store.list('doses').forEach(d=>add(d.at.slice(0,10),isInjection(d)?'inj':'oral'));Store.list('weights').forEach(w=>add(w.date,'weight'));return m;}
 function viewCal(){
  const now=new Date();if(S.calY==null){S.calY=now.getFullYear();S.calM=now.getMonth();}
  if(!S.calSel)S.calSel=ymd(now);
@@ -1082,7 +1234,7 @@ function viewCal(){
   cells+=`<button class="day ${d.getMonth()!==m?'mute':''} ${k===ymd(now)?'today':''} ${S.calSel===k?'sel':''} ${dueDays.has(k)?'due':''}" data-act="calDay" data-v="${k}" aria-label="${fmtDateY(d)}"><span class="n">${d.getDate()}</span><span class="marks">${s?['inj','oral','weight'].filter(x=>s.has(x)).map(markHTML).join(''):''}</span></button>`;}
  const wd=LANG==='zh'?['日','一','二','三','四','五','六']:['S','M','T','W','T','F','S'];
  const k=S.calSel;const ds=sortedDoses().filter(d=>d.at.startsWith(k));const ws=sortedWeights().filter(w=>w.date===k);const ns=Store.list('notes').filter(n=>n.date===k);const cs=Store.list('checkins').filter(c=>c.date===k);
- const items=ds.map(d=>`<button class="list-row" data-act="editDose" data-id="${d.id}"><span class="mark">${isInjection(d.drug)?IC.syringe:IC.pill}</span><span class="grow"><div class="title">${fmtDate(k)} · ${esc(drugName(d))}${isInjection(d.drug)&&LANG==='zh'?'注射':''}</div><div class="sub">${d.dose} mg${d.site?' · '+t(d.site):''} · ${hm(parseLocal(d.at))}</div></span>${IC.chev}</button>`).join('')
+ const items=ds.map(d=>`<button class="list-row" data-act="editDose" data-id="${d.id}"><span class="mark">${isInjection(d)?IC.syringe:IC.pill}</span><span class="grow"><div class="title">${fmtDate(k)} · ${esc(drugName(d))}${' · '+(isInjection(d)?t('inj'):t('oralType'))}</div><div class="sub">${d.dose} mg${d.site?' · '+t(d.site):''} · ${hm(parseLocal(d.at))}</div></span>${IC.chev}</button>`).join('')
   +ws.map(w=>`<button class="list-row" data-act="editWeight" data-id="${w.id}"><span class="mark">${IC.scale}</span><span class="grow"><div class="title">${fmtDate(k)} · ${LANG==='zh'?'称重':'Weigh-in'}</div><div class="sub">${W.fmt(w.kg)} ${W.u()}${w.note?' · '+esc(w.note):''}</div></span>${IC.chev}</button>`).join('')
   +cs.map(checkRow).join('')
   +ns.map(n=>`<button class="list-row" data-act="editNote" data-id="${n.id}"><span class="mark">${IC.notes}</span><span class="grow"><div class="title">${esc(n.title||t('untitled'))}</div><div class="sub">${esc((n.content||'').slice(0,60))}</div></span>${IC.chev}</button>`).join('');
@@ -1102,7 +1254,8 @@ function doseChanges(){const out=[];let prev=null;sortedDoses().forEach(d=>{cons
 function viewTrend(){
  const ws=rangeWeights();const all=sortedWeights();const lw=latestWeight();const sk=startKg();
  const rchg=ws.length>=2?ws[ws.length-1].kg-ws[0].kg:null;
- let avg=null;if(all.length>=2){const days=(parseLocal(all[all.length-1].date)-parseLocal(all[0].date))/DAY;if(days>=1)avg=(all[all.length-1].kg-(P().startKg||all[0].kg))/(days/7);}
+ let avg=null;if(ws.length>=2){const days=(parseLocal(ws[ws.length-1].date)-parseLocal(ws[0].date))/DAY;if(days>=1)avg=rchg/(days/7);}
+ const startW=ws.length?ws[0].kg:null;
  const b=lw?bmi(lw.kg):null;const low=all.length?Math.min(...all.map(w=>w.kg)):null;
  const ranges=[['7','rangeW'],['30','rangeM'],['90','range3M'],['all','rangeAll']];
  let h=largeNav(t('trendTitle'),`<button class="icon-btn" data-act="shareProgress" aria-label="${t('shareSummary')}">${IC.share}</button>`)+
@@ -1110,13 +1263,19 @@ function viewTrend(){
  <section class="card glass"><div class="row-spread"><div class="range" id="rangeSeg">${ranges.map(([k,l])=>`<button data-act="range" data-v="${k}" aria-pressed="${S.range===k}">${t(l)}</button>`).join('')}</div>${rchg!=null?deltaChip(rchg):''}</div>
  <div class="chart-wrap" id="chartWrap">${ws.length>=2?chartSVG(ws):`<div class="empty"><p>${t('chartEmpty')}</p><div class="btns"><button class="btn block" data-act="addWeight">${t('qWeight')}</button></div></div>`}</div>
  ${ws.length>=2?`<div class="legend"><span class="it"><i class="ln"></i>${t('legLine')}</span><span class="it"><i class="pt"></i>${t('legPoint')}</span><span class="it"><i class="mark-inject"></i>${t('legInj')}</span><span class="it"><i class="mark-oral"></i>${t('legOral')}</span></div><p class="chart-note">${t('chartNote')}</p>`:''}</section>
- <section class="card glass"><div class="card-label" style="margin-bottom:8px">${t('period')}</div><div class="kv">
-  <div><div class="k">${t('startEx')}</div><div class="v">${ws.length?W.fmt(ws[0].kg)+' '+W.u():'—'}</div></div><div class="r"><div class="k">${t('change')}</div><div class="v ${rchg!=null&&rchg<-0.04?'good':''}">${rchg==null?'—':W.delta(rchg)+' '+W.u()}</div></div>
-  <div><div class="k">${t('avgWeekly')}</div><div class="v">${avg==null?'—':W.delta(avg)+' '+W.u()}</div></div><div class="r"><div class="k">${t('totalLoss')}</div><div class="v ${lw&&sk!=null&&lw.kg-sk<0?'good':''}">${lw&&sk!=null?W.delta(lw.kg-sk)+' '+W.u():'—'}</div></div>
-  <div><div class="k">${t('bmi')}</div><div class="v">${b?fmtNum(b,1):`<a class="link" data-act="openSettings">${t('needHeight')}</a>`}</div></div><div class="r"><div class="k">${t('lowest')}</div><div class="v">${low==null?'—':W.fmt(low)+' '+W.u()}</div></div></div></section>
+ <section class="card glass" id="trendStats"><div class="card-label" style="margin-bottom:4px">${t('period')}</div>
+  <div class="stat-row">
+   <div class="cell"><div class="k">${t('totalChange')}</div><div class="v ${rchg!=null&&rchg<-0.04?'good':''}">${rchg==null?'—':W.delta(rchg)+' '+W.u()}</div></div>
+   <div class="cell"><div class="k">${t('weeklyAvg')}</div><div class="v">${avg==null?'—':W.delta(avg)+' '+W.u()}</div></div>
+   <div class="cell"><div class="k">${t('startEx')}</div><div class="v">${startW==null?'—':W.fmt(startW)+' '+W.u()}</div></div>
+  </div>
+  <div class="kv" style="margin-top:12px">
+   <div><div class="k">${t('bmi')}</div><div class="v">${b?fmtNum(b,1):`<a class="link" data-act="openSettings">${t('needHeight')}</a>`}</div></div>
+   <div class="r"><div class="k">${t('lowest')}</div><div class="v">${low==null?'—':W.fmt(low)+' '+W.u()}</div></div>
+  </div></section>
  <section class="card glass"><div class="card-label">${t('fxChart')}</div>${fxChartSVG()}</section>`;
  const steps=doseChanges();
- if(steps.length)h+=`<div class="section-title">${t('doseHistory')}</div><div class="list glass">${steps.slice().reverse().map(d=>`<div class="list-row"><span class="mark">${isInjection(d.drug)?IC.syringe:IC.pill}</span><span class="grow"><div class="title">${esc(drugName(d))} ${d.dose} mg</div><div class="sub">${t('started')} ${fmtDateY(d.at.slice(0,10))}</div></span></div>`).join('')}</div>`;
+ if(steps.length)h+=`<div class="section-title">${t('doseHistory')}</div><div class="list glass">${steps.slice().reverse().map(d=>`<div class="list-row"><span class="mark">${isInjection(d)?IC.syringe:IC.pill}</span><span class="grow"><div class="title">${esc(drugName(d))} ${d.dose} mg</div><div class="sub">${t('started')} ${fmtDateY(d.at.slice(0,10))}</div></span></div>`).join('')}</div>`;
  const wl=all.map((w,i)=>[w,all[i-1]]).reverse();
  h+=`<div class="section-title"><span>${t('weightRecords')}</span><a class="link" data-act="addWeight">${t('qWeight')}</a></div>`+(all.length?`<div class="list glass" id="weightList">${wl.map(([w,p])=>{const d=p?w.kg-p.kg:null;return `<button class="list-row" data-act="editWeight" data-id="${w.id}"><span class="mark">${IC.scale}</span><span class="grow"><div class="title">${fmtDateY(w.date)}</div><div class="sub">${w.note?esc(w.note):'&nbsp;'}</div></span><span class="right"><div class="title">${W.fmt(w.kg)} ${W.u()}</div><div class="sub ${d!=null&&d<-0.04?'good':d!=null&&d>0.04?'warn':''}">${d==null?'':W.delta(d)}</div></span></button>`;}).join('')}</div>`:`<section class="card glass meta" style="text-align:center">${t('noWeights')}</section>`);
  BIND=bindChart;
@@ -1136,7 +1295,7 @@ function chartSVG(ws){
  // dose markers: diamond (injection) / capsule (oral) above the line; dose label when dose changes
  let mk='';let prevK=null;
  sortedDoses().forEach(d=>{const k=d.drug+'|'+d.dose;const changed=k!==prevK;prevK=k;const tt=parseLocal(d.at.slice(0,10)).getTime();if(tt<x0||tt>x1)return;const xx=X(tt),yy=Y(valAt(tt))-13;
-  mk+=isInjection(d.drug)?`<rect x="${xx-4}" y="${yy-4}" width="8" height="8" rx="1" transform="rotate(45 ${xx} ${yy})" fill="var(--chart-marker-inject)"/>`:`<rect x="${xx-5}" y="${yy-2.5}" width="10" height="5" rx="2.5" fill="var(--chart-marker-oral)"/>`;
+  mk+=isInjection(d)?`<rect x="${xx-4}" y="${yy-4}" width="8" height="8" rx="1" transform="rotate(45 ${xx} ${yy})" fill="var(--chart-marker-inject)"/>`:`<rect x="${xx-5}" y="${yy-2.5}" width="10" height="5" rx="2.5" fill="var(--chart-marker-oral)"/>`;
   if(changed)mk+=`<text x="${xx}" y="${yy-9}" text-anchor="middle" font-size="9.5" font-weight="600" fill="var(--color-accent-text)">${d.dose}</text>`;});
  const line=smoothPath(pts);const area=line+` L${pts[pts.length-1][0]},${h-B} L${pts[0][0]},${h-B} Z`;
  const dots=pts.length<=45?pts.map(p=>`<circle cx="${p[0].toFixed(1)}" cy="${p[1].toFixed(1)}" r="3.4" fill="var(--color-surface)" stroke="var(--chart-marker-weight)" stroke-width="2"/>`).join(''):'';
@@ -1203,57 +1362,175 @@ const appetiteHTML=(id,v)=>`<div class="scale5" id="${id}" role="group" aria-lab
 function bindAppetite(id,init){let v=init||null;const box=document.getElementById(id);box.onclick=e=>{const b=e.target.closest('[data-app]');if(!b)return;const n=Number(b.dataset.app);v=v===n?null:n;box.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(Number(x.dataset.app)===v)));};return ()=>v;}
 
 /* ---------------- Dose form (page) ---------------- */
+function applyMedToDraft(m, D){
+ D.medId=m.id;D.drug=m.generic;D.brand=m.brand||'';D.route=m.route;D.type=m.route==='oral'?'oral':'inj';
+ D.customName=m.custom?medText(m).gen:(m.other?'':'');
+}
+function initDoseDraft(o){
+ if(S.doseDraft)return S.doseDraft;
+ const rec=o.id?Store.get('doses',o.id):null;
+ const lastAny=sortedDoses().slice(-1)[0];
+ const lastInj=sortedDoses().filter(d=>isInjection(d)).slice(-1)[0];
+ const sug=suggestSite();
+ let D;
+ if(rec){
+  const m=matchMed(rec);
+  D={id:rec.id,type:isInjection(rec)?'inj':'oral',drug:rec.drug,brand:rec.brand||'',route:rec.route||(isInjection(rec)?'inj':'oral'),
+     medId:rec.medId||(m&&m.id)||'',customName:rec.customName||'',dose:rec.dose,site:rec.site||null,at:rec.at,
+     note:rec.note||'',effects:rec.effects,appetite:rec.appetite};
+ }else{
+  const preferOral=o.type==='oral'||o.drug==='oral';
+  const src=preferOral?sortedDoses().filter(d=>!isInjection(d)).slice(-1)[0]:(lastInj||lastAny);
+  const type=o.type||(src? (isInjection(src)?'inj':'oral') :'inj');
+  D={id:null,type,drug:'',brand:'',route:type==='oral'?'oral':'inj',medId:'',customName:'',dose:'',site:type==='inj'?(sug.next||'abdL'):null,
+     at:o.date?o.date+'T'+((P().schedule[type==='oral'?'oral':'sema']||{}).time||hm(new Date())):localDT(new Date()),
+     note:'',effects:null,appetite:null};
+  if(o.drug||src){
+   const seed=o.drug?{drug:o.drug,brand:o.brand,type:o.type,route:o.type==='oral'?'oral':undefined}:src;
+   const m=matchMed(seed);
+   if(m && (m.route==='oral')===(type==='oral')) applyMedToDraft(m,D);
+   else if(o.drug){D.drug=o.drug;D.route=o.drug==='oral'?'oral':'inj';D.type=D.route==='oral'?'oral':'inj';}
+  }
+ }
+ S.doseDraft=D;return D;
+}
+function pickFieldHTML(D){
+ const m=D.medId?findMed(D.medId):matchMed(D);
+ const has=!!(m||D.customName||D.brand);
+ if(!has){
+  return `<button type="button" class="field glass-strong pick-field" id="pickMed" data-act="pickMed" aria-haspopup="listbox" aria-label="${t('pickMed')}"><span class="pick-ph">${t('pickMedPh')}</span><span class="chev">${IC.chev}</span></button>`;
+ }
+ const tx=m?medText(m):{gen:D.customName||t(D.drug),brand:brandName(D)};
+ const route=m?m.route:(D.route||D.type);
+ return `<button type="button" class="field glass-strong pick-field" id="pickMed" data-act="pickMed" aria-haspopup="listbox" aria-label="${t('pickMed')}">
+  <div><div class="pick-name">${esc(tx.gen)}</div><div class="pick-sub">${esc(tx.brand?tx.brand+' · ':'')}${route==='oral'?t('oralType'):t('inj')}</div></div><span class="chev">${IC.chev}</span></button>`;
+}
 function viewDoseForm(o){
  const rec=o.id?Store.get('doses',o.id):null;
- const lastInj=sortedDoses().filter(d=>isInjection(d.drug)).slice(-1)[0],lastAny=sortedDoses().slice(-1)[0];
- let type=rec?(rec.drug==='oral'?'oral':'inj'):(o.type||(o.drug==='oral'?'oral':(lastAny&&lastAny.drug==='oral'&&!lastInj?'oral':'inj')));
- let drug=rec?rec.drug:(type==='oral'?'oral':(o.drug&&o.drug!=='oral'?o.drug:(lastInj?lastInj.drug:(activeMeds().find(isInjection)||'sema'))));
- const lastOf=dr=>sortedDoses().filter(d=>d.drug===dr).slice(-1)[0];
- const sug=suggestSite();let site=rec?rec.site:(sug.next||'abdL');let brand=rec?rec.brand||'':((lastOf(drug)||{}).brand||'');
- const at=rec?rec.at:(o.date?o.date+'T'+((P().schedule[drug]||{}).time||hm(new Date())):localDT(new Date()));
- const dose=rec?rec.dose:((lastOf(drug)||{}).dose||'');
+ const D=initDoseDraft(o);
+ const sug=suggestSite();
  BIND=()=>{
   const f=$('#doseForm');
-  const getFx=bindFxPicker('doseFx');const getApp=bindAppetite('doseApp',rec&&rec.appetite);
+  const getFx=bindFxPicker('doseFx');const getApp=bindAppetite('doseApp',D.appetite);
+  const sync=()=>{D.dose=f.dose.value;D.at=f.at.value;D.note=f.note.value;D.effects=getFx();D.appetite=getApp();D.customName=f.customName?f.customName.value:D.customName;};
   const render=()=>{
-   $('#typeSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===type)));
-   const opts=type==='inj'?['sema','tirz','custom']:['oral'];
-   $('#drugChips').innerHTML=type==='inj'?opts.map(d=>`<button type="button" class="chip" data-drug="${d}" aria-pressed="${d===drug}">${t(d)}</button>`).join(''):'';
-   $('#nameWrap').classList.toggle('hidden',!(drug==='custom'||type==='oral'));
-   f.customName.placeholder=type==='oral'?t('oralNamePh'):t('customNamePh');
-   const bs=BRANDS[drug]||[];$('#brandWrap').innerHTML=bs.length?`<span class="label" style="margin-top:10px">${t('brand')}</span><div class="chips">${bs.map(b=>`<button type="button" class="chip" data-brand="${b.k}" aria-pressed="${brand===b.k}">${LANG==='zh'?b.zh:b.en}</button>`).join('')}</div><div class="helper">${t('brandNote')}</div>`:'';
-   $('#presetChips').innerHTML=(PRESETS[drug]||[]).map(v=>`<button type="button" class="chip" data-preset="${v}" aria-pressed="${Number(f.dose.value)===v}">${v} mg</button>`).join('');
-   $('#siteWrap').classList.toggle('hidden',type!=='inj');
+   $('#typeSeg').querySelectorAll('button').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.v===D.type)));
+   $('#pickWrap').innerHTML=pickFieldHTML(D);
+   $('#nameWrap').classList.toggle('hidden',!(D.drug==='custom'&&!D.medId));
+   $('#siteWrap').classList.toggle('hidden',D.type!=='inj');
   };
   render();
-  $('#typeSeg').onclick=e=>{const b=e.target.closest('[data-v]');if(!b)return;type=b.dataset.v;drug=type==='oral'?'oral':(lastInj?lastInj.drug:'sema');if(!rec){const l=lastOf(drug);f.dose.value=l?l.dose:'';brand=l&&l.brand||'';}render();};
-  $('#drugChips').onclick=e=>{const b=e.target.closest('[data-drug]');if(!b)return;drug=b.dataset.drug;if(!rec){const l=lastOf(drug);f.dose.value=l?l.dose:'';brand=l&&l.brand||'';}else brand='';render();};
-  $('#brandWrap').onclick=e=>{const b=e.target.closest('[data-brand]');if(!b)return;brand=brand===b.dataset.brand?'':b.dataset.brand;render();};
-  $('#presetChips').onclick=e=>{const b=e.target.closest('[data-preset]');if(!b)return;f.dose.value=b.dataset.preset;render();};
-  f.dose.oninput=()=>$('#presetChips').querySelectorAll('[data-preset]').forEach(b=>b.setAttribute('aria-pressed',String(Number(f.dose.value)===Number(b.dataset.preset))));
-  $('#siteChips').onclick=e=>{const b=e.target.closest('[data-site]');if(!b)return;site=site===b.dataset.site?null:b.dataset.site;$('#siteChips').querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.site===site)));};
-  f.onsubmit=e=>{e.preventDefault();const dv=parseFloat(f.dose.value);if(!(dv>0)){f.dose.focus();return;}
-   const r={drug,dose:dv,at:f.at.value,site:type==='inj'?site:null,effects:getFx(),appetite:getApp(),note:f.note.value.trim(),customName:(drug==='custom'||drug==='oral')?f.customName.value.trim():'',brand:(BRANDS[drug]||[]).some(b=>b.k===brand)?brand:''};
+  bindSiteChips(D);
+  $('#typeSeg').onclick=e=>{const b=e.target.closest('[data-v]');if(!b)return;const nt=b.dataset.v;if(nt===D.type)return;
+   D.type=nt;D.route=nt==='oral'?'oral':'inj';
+   const m=D.medId?findMed(D.medId):matchMed(D);
+   if(m&&m.route!==D.route){D.medId='';D.brand='';D.customName='';D.drug=nt==='oral'?'oral':'sema';}
+   render();};
+  f.onsubmit=e=>{e.preventDefault();sync();if(!D.drug){const p=$('#pickMed');if(p)p.focus();return;}const dv=parseFloat(D.dose);if(!(dv>0)){f.dose.focus();return;}
+   const r={drug:D.drug,dose:dv,at:D.at,site:D.type==='inj'?D.site:null,effects:getFx(),appetite:getApp(),note:D.note.trim(),customName:(D.drug==='custom'||D.drug==='oral')?(D.customName||''):'',brand:D.brand||'',route:D.route||(D.type==='oral'?'oral':'inj'),medId:D.medId||''};
    if(rec)r.id=rec.id;Store.upsert('doses',r);
-   if(!P().meds.includes(drug)){Store.setProfile({meds:[...P().meds,drug]});}
-   toast(t('saved'));goBack();};
+   if(D.drug&&!P().meds.includes(D.drug)){Store.setProfile({meds:[...P().meds,D.drug]});}
+   S.doseDraft=null;toast(t('saved'));goBack();};
  };
  return pageNav(rec?t('editInj'):t('addInj'))+`<form id="doseForm" class="stack" style="gap:0">
   ${sampleTag()?`<div style="margin-bottom:10px">${sampleTag()}</div>`:''}
-  <div class="fgroup"><span class="label">${t('medType')}</span>${segHTML('x',[['inj',t('inj')],['oral',t('oralType')]],type).replace('class="seg ','id="typeSeg" class="seg ')}</div>
-  <div class="fgroup"><span class="label">${t('medName')}</span><div class="chips" id="drugChips"></div>
-   <div id="nameWrap" style="margin-top:8px"><input class="field" name="customName" value="${esc(rec&&rec.customName||'')}"></div><div id="brandWrap"></div><div class="helper">${t('medNameHint')}</div></div>
-  <label class="fgroup"><span class="label">${t('doseMg')}</span><input class="field num" name="dose" id="doseInput" type="number" inputmode="decimal" step="0.01" min="0" value="${dose}" placeholder="mg"></label>
-  <div class="chips" id="presetChips" style="margin:-6px 0 6px"></div><div class="helper" style="margin:0 0 14px">${t('doseHint')}</div>
-  <label class="fgroup"><span class="label">${t('time')}</span><input class="field" name="at" type="datetime-local" required value="${at}"></label>
-  <div class="fgroup" id="siteWrap"><span class="label">${t('siteOpt')}</span><div class="chips" id="siteChips">${SITES.map(s=>`<button type="button" class="chip ${!rec&&s===sug.next?'hint':''}" data-site="${s}" aria-pressed="${s===site}">${t(s)}</button>`).join('')}</div>
+  <div class="fgroup"><span class="label">${t('medType')}</span>${segHTML('x',[['inj',t('inj')],['oral',t('oralType')]],D.type).replace('class="seg ','id="typeSeg" class="seg ')}</div>
+  <div class="fgroup"><span class="label">${t('medName')}</span><div id="pickWrap">${pickFieldHTML(D)}</div>
+   <div id="nameWrap" class="${D.drug==='custom'&&!D.medId?'':'hidden'}" style="margin-top:8px"><input class="field" name="customName" value="${esc(D.customName||'')}" placeholder="${t('customMedNamePh')}"></div>
+   <div class="helper">${t('medNameHint')}</div></div>
+  <label class="fgroup"><span class="label">${t('doseMg')}</span><input class="field num" name="dose" id="doseInput" type="number" inputmode="decimal" step="0.01" min="0" value="${D.dose===''||D.dose==null?'':D.dose}" placeholder="mg"></label>
+  <div class="helper" style="margin:-6px 0 14px">${t('doseHint')}</div>
+  <label class="fgroup"><span class="label">${t('time')}</span><input class="field" name="at" type="datetime-local" required value="${D.at}"></label>
+  <div class="fgroup" id="siteWrap" ${D.type!=='inj'?'class="fgroup hidden"':''}><span class="label">${t('siteOpt')}</span><div class="chips" id="siteChips">${SITES.map(s=>`<button type="button" class="chip ${!rec&&s===sug.next?'hint':''}" data-site="${s}" aria-pressed="${s===D.site}">${t(s)}</button>`).join('')}</div>
    <div class="helper">${sug.last?t('siteHint',{last:t(sug.last),next:t(sug.next)}):t('siteHintFirst')}</div></div>
-  <div class="fgroup"><span class="label">${t('effects')}</span>${fxPickerHTML('doseFx',rec&&rec.effects)}</div>
-  <div class="fgroup"><span class="label">${t('appetite')}</span>${appetiteHTML('doseApp',rec&&rec.appetite)}</div>
-  <label class="fgroup"><span class="label">${t('noteFx')}</span><textarea class="field" name="note" style="min-height:90px" placeholder="${t('notePh')}">${esc(rec&&rec.note||'')}</textarea></label>
+  <div class="fgroup"><span class="label">${t('effects')}</span>${fxPickerHTML('doseFx',D.effects)}</div>
+  <div class="fgroup"><span class="label">${t('appetite')}</span>${appetiteHTML('doseApp',D.appetite)}</div>
+  <label class="fgroup"><span class="label">${t('noteFx')}</span><textarea class="field" name="note" style="min-height:90px" placeholder="${t('notePh')}">${esc(D.note||'')}</textarea></label>
   <button class="btn block" type="submit" id="doseSave">${t('saveRecord')}</button>
   ${rec?`<button class="btn danger block" type="button" style="margin-top:10px" data-act="delDose" data-id="${rec.id}">${t('del')}</button>`:''}
-  <div style="margin-top:14px">${notice()}</div></form>`;
+  <div style="margin-top:16px;padding-bottom:8px">${notice()}</div></form>`;
+}
+function bindSiteChips(D){
+ const box=$('#siteChips');if(!box)return;
+ box.onclick=e=>{const b=e.target.closest('[data-site]');if(!b)return;D.site=D.site===b.dataset.site?null:b.dataset.site;box.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.site===D.site)));};
+}
+
+
+/* ---------------- Medication picker ---------------- */
+function medSearchBlob(m){
+ const z=m.zh||{},e=m.en||{};
+ return [z.gen,z.brand,e.gen,e.brand,m.generic,m.brand].filter(Boolean).join(' ').toLowerCase();
+}
+function pickerRow(m, selectedId){
+ const tx=medText(m);const sel=selectedId&&m.id===selectedId;
+ return `<button type="button" class="picker-row" role="option" data-med="${esc(m.id)}" aria-selected="${sel?'true':'false'}">
+  <div class="names"><div class="gen">${esc(tx.gen)}</div><div class="brand">${tx.brand?esc(tx.brand):'&nbsp;'}</div></div>
+  <span class="route ${m.route==='oral'?'oral':'inject'}">${m.route==='oral'?t('oralType'):t('inj')}</span>
+  <span class="tick">${sel?IC.tick:''}</span></button>`;
+}
+function viewMedPicker(){
+ const D=S.doseDraft||{};
+ const selected=D.medId||((matchMed(D)||{}).id||'');
+ BIND=()=>{
+  const inp=$('#medSearch');
+  const paint=()=>{
+   const q=(inp.value||'').trim().toLowerCase();
+   S.medQuery=inp.value||'';
+   const hit=m=>!q||medSearchBlob(m).includes(q);
+   let h='';
+   if(!q){
+    const freq=frequentMeds().filter(hit);
+    if(freq.length)h+=`<div class="section-title">${t('frequent')}</div><section class="list glass">${freq.map(m=>pickerRow(m,selected)).join('')}</section>`;
+   }
+   GENERIC_GROUPS.forEach(g=>{
+    const rows=g.ids.map(id=>findMed(id)).filter(Boolean).filter(hit);
+    if(!rows.length)return;
+    h+=`<div class="picker-group"><div class="section-title">${LANG==='zh'?g.zh:g.en}</div><section class="list glass">${rows.map(m=>pickerRow(m,selected)).join('')}</section></div>`;
+   });
+   const customs=(P().customMeds||[]).map(u=>findMed(u.id)).filter(Boolean).filter(hit);
+   if(customs.length)h+=`<div class="picker-group"><div class="section-title">${t('otherGroup')}</div><section class="list glass">${customs.map(m=>pickerRow(m,selected)).join('')}</section></div>`;
+   if(!h)h+=`<section class="card glass meta" style="text-align:center">${t('noMedMatch')}</section>`;
+   $('#medList').innerHTML=h;
+  };
+  inp.value=S.medQuery||'';
+  paint();
+  inp.oninput=paint;
+  $('#medList').onclick=e=>{
+   const b=e.target.closest('[data-med]');if(!b)return;
+   const m=findMed(b.dataset.med);if(!m||!S.doseDraft)return;
+   applyMedToDraft(m,S.doseDraft);S.medQuery='';goBackTo('dose');
+  };
+ };
+ return pageNav(t('pickMed'))+`<div class="stack" style="gap:12px" id="medPicker">
+  <div class="search-field glass-strong" role="search">${IC.search}<input id="medSearch" type="search" enterkeyhint="search" placeholder="${t('searchMed')}" autocapitalize="off" autocomplete="off"></div>
+  <div id="medList"></div>
+  <div class="picker-group"><div class="section-title">${t('otherGroup')}</div>
+   <section class="list glass"><button type="button" class="picker-row" data-act="addCustomMed" id="btnCustomMed">
+    <div class="names"><div class="gen">${t('addCustomMed')}</div><div class="brand">${t('customMedHint')}</div></div>
+    <span class="chev" style="color:var(--color-text-muted);display:flex">${IC.plus}</span>
+   </button></section></div>
+  <p class="trademark-note">${t('trademarkNote')}</p>
+ </div>`;
+}
+function viewCustomMed(){
+ BIND=()=>{
+  const f=$('#customMedForm');let route='inj';
+  $('#cRoute').onclick=e=>{const b=e.target.closest('[data-v]');if(!b)return;route=b.dataset.v;$('#cRoute').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x.dataset.v===route)));};
+  f.onsubmit=e=>{
+   e.preventDefault();const name=f.name.value.trim();if(!name){f.name.focus();return;}
+   const id='custom-'+uid();
+   Store.setProfile({customMeds:(P().customMeds||[]).concat([{id,name,route}])});
+   if(!S.doseDraft)S.doseDraft={};
+   applyMedToDraft(findMed(id),S.doseDraft);
+   S.medQuery='';goBackTo('dose');
+  };
+ };
+ return pageNav(t('addCustomMed'))+`<form id="customMedForm">
+  <label class="fgroup"><span class="label">${t('customMedName')}</span><input class="field" name="name" id="customMedName" placeholder="${t('customMedNamePh')}" required></label>
+  <div class="fgroup"><span class="label">${t('medType')}</span>${segHTML('x',[['inj',t('inj')],['oral',t('oralType')]],'inj').replace('class="seg ','id="cRoute" class="seg ')}</div>
+  <div class="helper">${t('customMedHint')}</div>
+  <button class="btn block" type="submit" id="customMedSave">${t('add')}</button>
+  <div style="margin-top:16px">${notice()}</div></form>`;
 }
 
 /* ---------------- Weight form ---------------- */
@@ -1437,8 +1714,12 @@ document.addEventListener('click',async e=>{
   case 'range':S.range=v;renderApp();break;
   case 'calNav':{let m=S.calM+Number(v),y=S.calY;if(m<0){m=11;y--;}if(m>11){m=0;y++;}S.calM=m;S.calY=y;S.calSel=ymd(new Date(y,m,1));renderApp();break;}
   case 'calDay':S.calSel=v;renderApp();break;
-  case 'addDose':go({k:'dose',drug:el.dataset.drug,type:el.dataset.type,date:el.dataset.date});break;
-  case 'editDose':go({k:'dose',id});break;
+  case 'addDose':S.doseDraft=null;S.medQuery='';go({k:'dose',drug:el.dataset.drug,type:el.dataset.type,date:el.dataset.date});break;
+  case 'editDose':S.doseDraft=null;S.medQuery='';go({k:'dose',id});break;
+  case 'openSheet':openRecordSheet();break;
+  case 'closeSheet':closeSheet();break;
+  case 'pickMed':{const f=$('#doseForm');const D=S.doseDraft||{};if(f){D.dose=f.dose&&f.dose.value;D.at=f.at&&f.at.value;D.note=f.note?f.note.value:D.note;if(f.customName)D.customName=f.customName.value;}S.doseDraft=D;go({k:'medPicker'});break;}
+  case 'addCustomMed':go({k:'customMed'});break;
   case 'addWeight':go({k:'weight',date:el.dataset.date});break;
   case 'editWeight':go({k:'weight',id});break;
   case 'addNote':go({k:'note',date:el.dataset.date});break;
